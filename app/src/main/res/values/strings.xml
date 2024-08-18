@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">DiagnosticoMovil2</string>
+    <string name="show">Consultar</string>
+    <string name="register">Registrar</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="send">Enviar</string>
+    <string name="delete">Borrar</string>
+    <string name="search">Buscar</string>
+    <string name="formRegister">Agregar herramienta</string>
+    <string name="seeTools">Herramientas registradas</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="exit">Salir</string>
+    <string name="save">Guardar</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="name">Nombre</string>
+    <string name="home">Inicio</string>
+    <string name="brand">Marca</string>
+    <string name="isElectric">¿Es electrica?</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="price">Price</string>
+
+</resources>
