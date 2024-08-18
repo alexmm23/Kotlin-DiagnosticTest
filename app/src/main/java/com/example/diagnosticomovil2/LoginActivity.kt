@@ -1,6 +1,7 @@
 package com.example.diagnosticomovil2
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -43,6 +44,12 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Bienvenido! ${foundUser.name}", Toast.LENGTH_LONG).show()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("user", foundUser.name)
+            //Iniciar sharedPreferences
+            val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString("user", foundUser.name)
+            editor.putString("tools", "")
+            editor.apply()
             startActivity(intent)
         } else {
             Toast.makeText(this, "Usuario o contraseña inválidos", Toast.LENGTH_SHORT).show()
