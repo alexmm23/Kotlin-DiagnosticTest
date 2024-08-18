@@ -48,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
             val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putString("user", foundUser.name)
-            editor.putString("tools", "")
             editor.apply()
             startActivity(intent)
         } else {
