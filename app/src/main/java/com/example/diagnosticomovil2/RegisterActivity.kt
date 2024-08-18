@@ -23,13 +23,13 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class RegisterActivity : AppCompatActivity() {
-    var tools: MutableList<Tool> =  mutableListOf()
+    private lateinit var tools: MutableList<Tool> // Lista mutable de herramientas
     val utils = Utils()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        utils.clearPreferences(this)
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar3)
+        tools = utils.getToolsFromSharedPreferences(this)?.toMutableList() ?: mutableListOf()
         setSupportActionBar(toolbar)
         // Obtener referencias a los elementos de la interfaz
         val edtToolName: EditText = findViewById(R.id.edtToolName)
@@ -84,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val tool =  Tool(
-                IdGenerator.getNextId(),
+                IdGenerator.getNextId(this),
                 toolName,
                 selectedType,
                 toolBrand,
@@ -92,10 +92,6 @@ class RegisterActivity : AppCompatActivity() {
                 isElectric == "Sí" // Si el valor es "Sí" entonces es true, de lo contrario es false
             )
             Toast.makeText(this, "Herramienta registrada", Toast.LENGTH_SHORT).show()
-            if (toolExists(tool)) {
-                Toast.makeText(this, "La herramienta ya existe", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
             tools.add(tool)
             utils.saveToolsToSharedPreferences(this, tools)
             clearInputs()
@@ -148,6 +144,10 @@ class RegisterActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.edtPrice).setText("")
         findViewById<RadioGroup>(R.id.radioGroup).clearCheck()
         findViewById<Spinner>(R.id.spnType).setSelection(0)
+    }
+    override fun onResume() {
+        super.onResume()
+        tools = utils.getToolsFromSharedPreferences(this)?.toMutableList() ?: mutableListOf()
     }
 
 

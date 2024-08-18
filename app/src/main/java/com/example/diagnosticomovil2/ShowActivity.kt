@@ -13,13 +13,14 @@ class ShowActivity : AppCompatActivity() {
 
     val utils = Utils()
     private lateinit var tools: List<Tool>
+    private lateinit var txtShow: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show)
         tools = utils.getToolsFromSharedPreferences(this) ?: emptyList()
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar2)
         setSupportActionBar(toolbar)
-        val txtShow: TextView = findViewById(R.id.txtShow)
+        txtShow = findViewById(R.id.txtShow)
         var text = ""
         if (tools.isEmpty()) {
             text = "No hay herramientas registradas"
@@ -30,6 +31,7 @@ class ShowActivity : AppCompatActivity() {
             for (tool in tools) {
                 isElectric = if (tool.isElectric) "Si" else "No"
                 text += "${tool.id} - ${tool.name} - ${tool.type} - ${tool.brand} - ${tool.price} - ${isElectric}\n"
+                print("${tool.id} - ${tool.name} - ${tool.type} - ${tool.brand} - ${tool.price} - ${isElectric}\n")
             }
         }
         txtShow.text = text
@@ -71,5 +73,15 @@ class ShowActivity : AppCompatActivity() {
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)?.let {
             startActivity(it)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tools = utils.getToolsFromSharedPreferences(this) ?: emptyList()
+        var newText = ""
+        tools.forEach() {
+            newText += "${it.id} - ${it.name} - ${it.type} - ${it.brand} - ${it.price} - ${it.isElectric}\n"
+        }
+        txtShow.text = newText
     }
 }
