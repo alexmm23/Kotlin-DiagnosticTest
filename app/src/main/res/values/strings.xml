@@ -21,5 +21,9 @@
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="price">Price</string>
-
+    <string-array name="types">
+        <item>Manual</item>
+        <item>Semi-automática</item>
+        <item>Automática</item>
+    </string-array>
 </resources>
